@@ -5,7 +5,7 @@ cd xxx(你的项目路径)
 
 cordova plugin add xxx(插件路径，可以将插件下载到本地安装)
 
-'''
+<html>
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -19,4 +19,4 @@ function error(msg){
 alert(msg);
 }
 </script>
-'''
+</html>
