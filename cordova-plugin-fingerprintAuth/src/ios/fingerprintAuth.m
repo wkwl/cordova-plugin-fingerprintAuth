@@ -27,7 +27,7 @@
         }else if ([str isEqualToString:ValidateTouchIDAuthenticationFailed]){
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"指纹识别授权失败"];
         }else{
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"取消"];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"取消"];
         }
 
         NSLog(@"999999%@",str);
