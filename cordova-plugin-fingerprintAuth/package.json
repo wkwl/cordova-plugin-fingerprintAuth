@@ -1,0 +1,12 @@
+{
+  "name": "fingerprintAuth",
+  "version": "1.0.0",
+  "description": "fingerprintAuth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author":"wkw",
+  "license":"ISC"
+
+}
