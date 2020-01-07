@@ -13,26 +13,34 @@
         [self setupNotification];
         [TouchIDManager validateTouchID];
     });
+
 }
+
 - (void)callbackAction:(NSString *)String {
     __block NSString *str = String;
+    __weak fingerprintAuth *weakSelf = self;
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *pluginResult = nil;
+        NSDictionary *dic ;
         if ([str isEqualToString:ValidateTouchIDSuccess]) {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"指纹识别授权成功"];
+            dic = @{@"success":@(YES),@"description":@"指纹识别成功",@"code":@"0"};
         }else if ([str isEqualToString:ValidateTouchIDNotAvailable]){
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"设备指纹识别不可用"];
+            dic = @{@"success":@(NO),@"description":@"该设备指纹识别不可用",@"code":@"1"};
         }else if ([str isEqualToString:ValidateTouchIDNotEnrolled]){
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"设备未设置指纹"];
+            dic = @{@"success":@(NO),@"description":@"设备未设置指纹",@"code":@"2"};
         }else if ([str isEqualToString:ValidateTouchIDAuthenticationFailed]){
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"指纹识别授权失败"];
+            dic = @{@"success":@(NO),@"description":@"指纹识别失败",@"code":@"3"};
+        }else {
+            dic = @{@"success":@(NO),@"description":@"取消",@"code":@"4"};
+        }
+        if ([str isEqualToString:ValidateTouchIDSuccess]) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dic];
         }else{
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"取消"];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dic];
         }
 
-        NSLog(@"999999%@",str);
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.myCommand.callbackId];
-
+//        NSLog(@"999999%@",str);
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:weakSelf.myCommand.callbackId];
     }];
 }
 
@@ -98,4 +106,5 @@
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
+
 @end
