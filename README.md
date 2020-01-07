@@ -8,7 +8,7 @@ code:1//该设备指纹识别不可用
 code:2//设备未设置指纹
 code:3//指纹识别失败
 code:4//取消
-cordova plugin add xxx(插件路径，可以将插件下载到本地安装)
+cordova plugin add xxx(插件路径，可以将插件下载到本地安装，也可以cordova plugin add https://github.com/wkwl/cordova-plugin-fingerprintAuth.git)
 
 ```
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
